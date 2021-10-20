@@ -3,6 +3,7 @@ package br.com.hotmart.apiteste.controller;
 import br.com.hotmart.apiteste.dto.DepartamentoDTO;
 import br.com.hotmart.apiteste.dto.DetalhesDepartamentoDTO;
 import br.com.hotmart.apiteste.form.DepartamentoForm;
+import br.com.hotmart.apiteste.form.DepartamentoUpdateForm;
 import br.com.hotmart.apiteste.model.Departamento;
 import br.com.hotmart.apiteste.repository.DepartamentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
@@ -31,7 +33,7 @@ public class DepartamentoController {
     }
 
     @PostMapping
-    public ResponseEntity<DepartamentoDTO> cadastrar(@RequestBody @Valid DepartamentoForm form, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<DepartamentoDTO> create(@RequestBody @Valid DepartamentoForm form, UriComponentsBuilder uriBuilder) {
 
         Departamento departamento = new Departamento();
         departamento.setNome(form.getNome());
@@ -43,12 +45,21 @@ public class DepartamentoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<DetalhesDepartamentoDTO> detalhar(@PathVariable("id") Long id){
+    public ResponseEntity<DetalhesDepartamentoDTO> detail(@PathVariable("id") Long id){
         Optional<Departamento> departamento = departamentoRepository.findById(id);
         if(departamento.isPresent()){
             return ResponseEntity.ok(new DetalhesDepartamentoDTO(departamento.get()));
         }
         return	ResponseEntity.notFound().build();
 
+    }
+    @PutMapping("/{id}")
+    @Transactional
+    public ResponseEntity<DepartamentoDTO> update(@PathVariable Long id,@RequestBody @Valid DepartamentoUpdateForm form) {
+        Departamento departamento = form.update(id,departamentoRepository);
+        if(departamento != null){
+            return ResponseEntity.ok(new DepartamentoDTO(departamento));
+        }
+        return	ResponseEntity.notFound().build();
     }
 }

@@ -39,6 +39,6 @@ public class DetalhesDepartamentoDTO {
     public void setNumero(int numero) {
         this.numero = numero;
     }
-    
+
 }
 
