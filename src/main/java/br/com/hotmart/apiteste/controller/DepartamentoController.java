@@ -62,4 +62,16 @@ public class DepartamentoController {
         }
         return	ResponseEntity.notFound().build();
     }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity<DepartamentoDTO> safe_delete(@PathVariable Long id) {
+        Optional<Departamento> departamento = departamentoRepository.findById(id);
+        Departamento departamento_save = departamento.get();
+        if(departamento != null){
+            departamentoRepository.deleteById(id);
+            return ResponseEntity.ok(new DepartamentoDTO(departamento_save));
+        }
+        return	ResponseEntity.notFound().build();
+    }
 }

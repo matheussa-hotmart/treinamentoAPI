@@ -1,27 +1,17 @@
-package br.com.hotmart.apiteste.model;
+package br.com.hotmart.apiteste.dto;
 
+import br.com.hotmart.apiteste.model.Departamento;
+import br.com.hotmart.apiteste.model.Projeto;
 
-import javax.persistence.*;
-
-@Entity
-@Table(name="projeto", schema = "empresa")
-public class Projeto {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
+public class DetalhesProjetoDTO {
     private Long id;
-    @Column(name="nome")
     private String nome;
-    @ManyToOne
-    @JoinColumn(name = "departamento_id")
     private Departamento departamento;
 
-    public Projeto() {
-    }
-    public Projeto(String nome, Departamento departamento){
-        this.nome = nome;
-        this.departamento = departamento;
+    public DetalhesProjetoDTO(Projeto projeto) {
+        this.id = projeto.getId();
+        this.nome = projeto.getNome();
+        this.departamento = projeto.getDepartamento();
     }
 
     public Long getId() {
@@ -47,6 +37,4 @@ public class Projeto {
     public void setDepartamento(Departamento departamento) {
         this.departamento = departamento;
     }
-
 }
-
