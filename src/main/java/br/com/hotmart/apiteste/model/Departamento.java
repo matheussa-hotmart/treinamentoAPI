@@ -1,5 +1,7 @@
 package br.com.hotmart.apiteste.model;
 
+import br.com.hotmart.apiteste.form.DepartamentoForm;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +24,10 @@ public class Departamento {
     public Departamento(String nome, int numero) {
         this.nome = nome;
         this.numero = numero;
+    }
+    public Departamento(DepartamentoForm form) {
+        this.nome = form.getNome();
+        this.numero = form.getNumero();
     }
 
     public Long getId() {

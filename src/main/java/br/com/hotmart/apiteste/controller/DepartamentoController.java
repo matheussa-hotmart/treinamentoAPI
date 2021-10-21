@@ -6,16 +6,15 @@ import br.com.hotmart.apiteste.form.DepartamentoForm;
 import br.com.hotmart.apiteste.form.DepartamentoUpdateForm;
 import br.com.hotmart.apiteste.model.Departamento;
 import br.com.hotmart.apiteste.repository.DepartamentoRepository;
+import br.com.hotmart.apiteste.service.DepartamentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
-import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/departamento")
@@ -24,39 +23,36 @@ public class DepartamentoController {
     @Autowired
     private DepartamentoRepository departamentoRepository;
 
-    private List<Departamento> departamentos;
+    @Autowired
+    private DepartamentoService departamentoService;
 
     @GetMapping
     public List<DepartamentoDTO> findAll(){
-        departamentos = (List<Departamento>) departamentoRepository.findAll();
+        List<Departamento> departamentos = (List<Departamento>) departamentoRepository.findAll();
         return DepartamentoDTO.converter(departamentos);
     }
 
     @PostMapping
-    public ResponseEntity<DepartamentoDTO> create(@RequestBody @Valid DepartamentoForm form, UriComponentsBuilder uriBuilder) {
-
-        Departamento departamento = new Departamento();
-        departamento.setNome(form.getNome());
-        departamento.setNumero(form.getNumero());
-        departamentoRepository.save(departamento);
-
-        URI uri = uriBuilder.path("/departamento/{id}").buildAndExpand(departamento.getId()).toUri();
-        return ResponseEntity.created(uri).body(new DepartamentoDTO(departamento));
+    public ResponseEntity<DepartamentoDTO> create(@RequestBody @Valid DepartamentoForm form) {
+        Departamento departamento = departamentoService.createDepartamento(form);
+        if(departamento != null){
+            return ResponseEntity.ok(new DepartamentoDTO(departamento));
+        }
+        return	ResponseEntity.notFound().build();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<DetalhesDepartamentoDTO> detail(@PathVariable("id") Long id){
-        Optional<Departamento> departamento = departamentoRepository.findById(id);
-        if(departamento.isPresent()){
-            return ResponseEntity.ok(new DetalhesDepartamentoDTO(departamento.get()));
+        Departamento departamento = departamentoService.getOneDepartamento(id);
+        if(departamento != null){
+            return ResponseEntity.ok(new DetalhesDepartamentoDTO(departamento));
         }
         return	ResponseEntity.notFound().build();
-
     }
     @PutMapping("/{id}")
     @Transactional
     public ResponseEntity<DepartamentoDTO> update(@PathVariable Long id,@RequestBody @Valid DepartamentoUpdateForm form) {
-        Departamento departamento = form.update(id,departamentoRepository);
+        Departamento departamento = departamentoService.updateDepartamento(id,form);
         if(departamento != null){
             return ResponseEntity.ok(new DepartamentoDTO(departamento));
         }
@@ -66,11 +62,9 @@ public class DepartamentoController {
     @DeleteMapping("/{id}")
     @Transactional
     public ResponseEntity<DepartamentoDTO> safe_delete(@PathVariable Long id) {
-        Optional<Departamento> departamento = departamentoRepository.findById(id);
-        Departamento departamento_save = departamento.get();
+        Departamento departamento = departamentoService.safeDeleteDepartamento(id);
         if(departamento != null){
-            departamentoRepository.deleteById(id);
-            return ResponseEntity.ok(new DepartamentoDTO(departamento_save));
+            return ResponseEntity.ok(new DepartamentoDTO(departamento));
         }
         return	ResponseEntity.notFound().build();
     }

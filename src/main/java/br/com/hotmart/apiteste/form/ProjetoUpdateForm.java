@@ -1,17 +1,14 @@
 package br.com.hotmart.apiteste.form;
 
-import br.com.hotmart.apiteste.dto.ProjetoDTO;
 import br.com.hotmart.apiteste.model.Departamento;
 import br.com.hotmart.apiteste.model.Projeto;
 import br.com.hotmart.apiteste.repository.DepartamentoRepository;
-import org.springframework.http.ResponseEntity;
+import br.com.hotmart.apiteste.repository.ProjetoRepository;
 
 import javax.validation.constraints.NotNull;
-import java.net.URI;
 import java.util.Optional;
 
-public class ProjetoForm {
-
+public class ProjetoUpdateForm {
     @NotNull
     private String nome;
     @NotNull
@@ -33,17 +30,23 @@ public class ProjetoForm {
         this.departamento = departamento;
     }
 
-    public Projeto converter(DepartamentoRepository departamentoRepository) {
-        //Verificação para ver se o id de departamento passado no form é válido, ou seja, se há um departamento com o id passado
+    public Projeto update(Long id, ProjetoRepository projetoRepository, DepartamentoRepository departamentoRepository){
+        Optional<Projeto> projeto = projetoRepository.findById(id);
+        Projeto projeto_save = projeto.get();
         Optional<Departamento> departamento = departamentoRepository.findById(this.departamento.getId());
         //Passa para a variavel que será salva
         Departamento departamento_save = departamento.get();
         //Verifica se há algum objeto
-        if(departamento.isPresent()) {
-            //Insere departamento na estrutura, departamento que veio do repositorio de departamentos
-            return new Projeto(this.nome, departamento_save);
+        if(projeto.isPresent()) {
+            if(departamento.isPresent()){
+                projeto_save.setNome(this.nome);
+                projeto_save.setDepartamento(departamento_save);
+                return projeto_save;
+            }
+            //Departamento não encontrado, retorna null
+            return null;
         }
-        //retorna nulo caso não haja departamento com o id passado
-       return null;
+        //Projeto não encontrado
+        return null;
     }
 }

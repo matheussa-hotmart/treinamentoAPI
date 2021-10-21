@@ -29,7 +29,4 @@ public class DepartamentoForm {
         this.numero = numero;
     }
 
-    public Departamento converter() {
-        return new Departamento(nome, numero);
-    }
 }
