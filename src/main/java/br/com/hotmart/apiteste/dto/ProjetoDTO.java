@@ -7,18 +7,18 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ProjetoDTO {
-    private Long projetoId;
+    private Long id;
     private String nome;
     private Departamento departamento;
 
     public ProjetoDTO(Projeto projeto) {
-        this.projetoId = projeto.getId();
+        this.id = projeto.getId();
         this.nome = projeto.getNome();
         this.departamento = projeto.getDepartamento();
     }
 
-    public Long getProjetoId() {
-        return projetoId;
+    public Long getId() {
+        return id;
     }
 
     public String getNome() {

@@ -64,6 +64,7 @@ public class DepartamentoController {
     public ResponseEntity<DepartamentoDTO> safe_delete(@PathVariable Long id) {
         Departamento departamento = departamentoService.safeDeleteDepartamento(id);
         if(departamento != null){
+            departamentoRepository.deleteById(id);
             return ResponseEntity.ok(new DepartamentoDTO(departamento));
         }
         return	ResponseEntity.notFound().build();

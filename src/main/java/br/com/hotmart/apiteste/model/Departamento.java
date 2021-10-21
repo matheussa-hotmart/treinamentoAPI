@@ -34,10 +34,6 @@ public class Departamento {
         return id;
     }
 
-    public void setId(Long departamentoId) {
-        this.id = departamentoId;
-    }
-
     public String getNome() {
         return nome;
     }

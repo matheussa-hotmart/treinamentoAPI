@@ -33,17 +33,4 @@ public class ProjetoForm {
         this.departamento = departamento;
     }
 
-    public Projeto converter(DepartamentoRepository departamentoRepository) {
-        //Verificação para ver se o id de departamento passado no form é válido, ou seja, se há um departamento com o id passado
-        Optional<Departamento> departamento = departamentoRepository.findById(this.departamento.getId());
-        //Passa para a variavel que será salva
-        Departamento departamento_save = departamento.get();
-        //Verifica se há algum objeto
-        if(departamento.isPresent()) {
-            //Insere departamento na estrutura, departamento que veio do repositorio de departamentos
-            return new Projeto(this.nome, departamento_save);
-        }
-        //retorna nulo caso não haja departamento com o id passado
-       return null;
-    }
 }

@@ -1,13 +1,10 @@
 package br.com.hotmart.apiteste.service;
 
-import br.com.hotmart.apiteste.dto.DepartamentoDTO;
-import br.com.hotmart.apiteste.dto.DetalhesDepartamentoDTO;
 import br.com.hotmart.apiteste.form.DepartamentoForm;
 import br.com.hotmart.apiteste.form.DepartamentoUpdateForm;
 import br.com.hotmart.apiteste.model.Departamento;
 import br.com.hotmart.apiteste.repository.DepartamentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -57,7 +54,6 @@ public class DepartamentoService {
         Optional<Departamento> departamento = departamentoRepository.findById(id);
         Departamento departamento_save = departamento.get();
         if(departamento != null){
-            departamentoRepository.deleteById(id);
             return departamento_save;
         }
         return	null;

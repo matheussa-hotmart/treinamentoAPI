@@ -1,6 +1,8 @@
 package br.com.hotmart.apiteste.model;
 
 
+import br.com.hotmart.apiteste.form.ProjetoForm;
+
 import javax.persistence.*;
 
 @Entity
@@ -19,17 +21,14 @@ public class Projeto {
 
     public Projeto() {
     }
-    public Projeto(String nome, Departamento departamento){
-        this.nome = nome;
-        this.departamento = departamento;
+
+    public Projeto(ProjetoForm form){
+        this.nome = form.getNome();
+        this.departamento = form.getDepartamento();
     }
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getNome() {
