@@ -27,7 +27,7 @@ public class DepartamentoController {
 
     @GetMapping
     public List<DepartamentoDTO> findAll(){
-        return DepartamentoDTO.converter((List<Departamento>) departamentoRepository.findAll());
+        return DepartamentoDTO.converter(departamentoRepository.findAll());
     }
 
     @PostMapping

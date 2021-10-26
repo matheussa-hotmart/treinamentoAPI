@@ -19,10 +19,7 @@ public class Departamento {
 
     public Departamento() {
     }
-    public Departamento(String nome, int numero) {
-        this.nome = nome;
-        this.numero = numero;
-    }
+
     public Departamento(DepartamentoForm form) {
         this.nome = form.getNome();
         this.numero = form.getNumero();

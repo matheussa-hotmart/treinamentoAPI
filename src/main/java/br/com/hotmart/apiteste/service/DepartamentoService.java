@@ -20,9 +20,9 @@ public class DepartamentoService {
     private String why = "Departamento not found with id: ";
 
     public Departamento createDepartamento(DepartamentoForm form){
-        Departamento departamento_save = new Departamento(form);
-        departamentoRepository.save(departamento_save);
-        return departamento_save;
+        Departamento departamento = new Departamento(form);
+        departamentoRepository.save(departamento);
+        return departamento;
     }
     @SuppressWarnings("Unchecked")
     public Departamento getOneDepartamento(Long id){
