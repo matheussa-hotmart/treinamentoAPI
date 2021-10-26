@@ -22,7 +22,7 @@ import java.util.Optional;
 public class EnderecoService {
 
     private final EnderecoRepository enderecoRepository;
-    private String why = "Endereco not found with id: ";
+    private String why = "Endereço not found with id: ";
 
     public Endereco createEndereco(EnderecoForm form) {
         Endereco endereco = new Endereco(form);

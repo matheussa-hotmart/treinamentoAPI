@@ -46,6 +46,7 @@ public class ProjetoService {
             projeto_save.setNome(form.getNome());
             //Substitui informação de departamento
             projeto_save.setDepartamento(departamento);
+            projetoRepository.save(projeto_save);
             //Retorna projeto salvo no bd
             return projeto_save;
         }
