@@ -4,8 +4,6 @@ import br.com.hotmart.apiteste.dto.DepartamentoDTO;
 import br.com.hotmart.apiteste.dto.DetalhesDepartamentoDTO;
 import br.com.hotmart.apiteste.form.DepartamentoForm;
 import br.com.hotmart.apiteste.form.DepartamentoUpdateForm;
-import br.com.hotmart.apiteste.model.Departamento;
-import br.com.hotmart.apiteste.repository.DepartamentoRepository;
 import br.com.hotmart.apiteste.service.DepartamentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,14 +18,11 @@ import java.util.List;
 public class DepartamentoController {
 
     @Autowired
-    private DepartamentoRepository departamentoRepository;
-
-    @Autowired
     private DepartamentoService departamentoService;
 
     @GetMapping
     public List<DepartamentoDTO> findAll(){
-        return DepartamentoDTO.converter(departamentoRepository.findAll());
+        return DepartamentoDTO.converter(departamentoService.getAll());
     }
 
     @PostMapping

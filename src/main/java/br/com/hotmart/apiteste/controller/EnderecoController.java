@@ -4,7 +4,6 @@ import br.com.hotmart.apiteste.dto.DetalhesEnderecoDTO;
 import br.com.hotmart.apiteste.dto.EnderecoDTO;
 import br.com.hotmart.apiteste.form.EnderecoForm;
 import br.com.hotmart.apiteste.form.EnderecoUpdateForm;
-import br.com.hotmart.apiteste.repository.EnderecoRepository;
 import br.com.hotmart.apiteste.service.EnderecoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,14 +18,11 @@ import java.util.List;
 public class EnderecoController {
 
     @Autowired
-    private EnderecoRepository enderecoRepository;
-
-    @Autowired
     private EnderecoService enderecoService;
 
     @GetMapping
     public List<EnderecoDTO> findAll(){
-        return EnderecoDTO.converter(enderecoRepository.findAll());
+        return EnderecoDTO.converter(enderecoService.getAll());
     }
 
     @PostMapping

@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -19,6 +20,7 @@ public class DepartamentoService {
     private final DepartamentoRepository departamentoRepository;
     private String why = "Departamento not found with id: ";
 
+    @SuppressWarnings("Unchecked")
     public Departamento createDepartamento(DepartamentoForm form){
         Departamento departamento = new Departamento(form);
         departamentoRepository.save(departamento);
@@ -44,7 +46,7 @@ public class DepartamentoService {
         return departamentoRepository.findById(id).orElseThrow(()-> new EntityNotFoundException(why+id));
 
     }
-
+    @SuppressWarnings("Unchecked")
     public Departamento safeDeleteDepartamento(Long id){
         Optional<Departamento> departamento = departamentoRepository.findById(id);
         if(departamento.isPresent()){
@@ -53,6 +55,10 @@ public class DepartamentoService {
         }
         return departamentoRepository.findById(id).orElseThrow(()-> new EntityNotFoundException(why+id));
 
+    }
+    @SuppressWarnings("Unchecked")
+    public List<Departamento> getAll(){
+        return departamentoRepository.findAll();
     }
 
 

@@ -2,8 +2,6 @@ package br.com.hotmart.apiteste.controller;
 
 import br.com.hotmart.apiteste.dto.FuncionarioDTO;
 import br.com.hotmart.apiteste.form.FuncionarioForm;
-import br.com.hotmart.apiteste.repository.EnderecoRepository;
-import br.com.hotmart.apiteste.repository.FuncionarioRepository;
 import br.com.hotmart.apiteste.service.FuncionarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,21 +11,15 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/projeto")
+@RequestMapping("/funcionario")
 public class FuncionarioController {
-
-    @Autowired
-    private FuncionarioRepository funcionarioRepository;
-
-    @Autowired
-    private EnderecoRepository enderecoRepository;
 
     @Autowired
     private FuncionarioService funcionarioService;
 
     @GetMapping("/")
     public List<FuncionarioDTO> getAllFuncionario(){
-        return FuncionarioDTO.converter(funcionarioRepository.findAll());
+        return FuncionarioDTO.converter(funcionarioService.getAll());
     }
 
     @GetMapping("/{id}")

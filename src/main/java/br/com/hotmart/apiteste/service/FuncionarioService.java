@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -20,6 +21,7 @@ public class FuncionarioService {
     private final EnderecoService enderecoService;
     private String why = "Funcionario not found with id: ";
 
+    @SuppressWarnings("Unchecked")
     public Funcionario createFuncionario(FuncionarioForm form){
         // guarda endereço buscando service, caso dê error exception lançada
         Endereco endereco = enderecoService.getOneEndereco(form.getEndereco().getId());
@@ -28,12 +30,12 @@ public class FuncionarioService {
         //retorna novo funcionario;
         return new Funcionario(form);
     }
-
+    @SuppressWarnings("Unchecked")
     public Funcionario getOneFuncionario(Long id){
         return funcionarioRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(why+id));
     }
 
-
+    @SuppressWarnings("Unchecked")
     public Funcionario updateFuncionario(Long id, FuncionarioForm form){
         Endereco endereco = enderecoService.getOneEndereco(form.getEndereco().getId());
         form.setEndereco(endereco);
@@ -50,7 +52,7 @@ public class FuncionarioService {
         }
         return funcionarioRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(why+id));
     }
-
+    @SuppressWarnings("Unchecked")
     public Funcionario safeDeleteFuncionario(Long id){
         Optional<Funcionario> funcionario = funcionarioRepository.findById(id);
         if(funcionario.isPresent()){
@@ -58,5 +60,9 @@ public class FuncionarioService {
             return funcionario.get();
         }
         return funcionarioRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(why+id));
+    }
+    @SuppressWarnings("Unchecked")
+    public List<Funcionario> getAll(){
+        return funcionarioRepository.findAll();
     }
 }

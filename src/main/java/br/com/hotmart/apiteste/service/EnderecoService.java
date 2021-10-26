@@ -2,18 +2,15 @@ package br.com.hotmart.apiteste.service;
 
 
 import br.com.hotmart.apiteste.exceptions.EntityNotFoundException;
-import br.com.hotmart.apiteste.form.DepartamentoForm;
-import br.com.hotmart.apiteste.form.DepartamentoUpdateForm;
 import br.com.hotmart.apiteste.form.EnderecoForm;
 import br.com.hotmart.apiteste.form.EnderecoUpdateForm;
-import br.com.hotmart.apiteste.model.Departamento;
 import br.com.hotmart.apiteste.model.Endereco;
-import br.com.hotmart.apiteste.repository.DepartamentoRepository;
 import br.com.hotmart.apiteste.repository.EnderecoRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -24,6 +21,7 @@ public class EnderecoService {
     private final EnderecoRepository enderecoRepository;
     private String why = "Endereço not found with id: ";
 
+    @SuppressWarnings("Unchecked")
     public Endereco createEndereco(EnderecoForm form) {
         Endereco endereco = new Endereco(form);
         enderecoRepository.save(endereco);
@@ -54,7 +52,7 @@ public class EnderecoService {
         return enderecoRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(why + id));
 
     }
-
+    @SuppressWarnings("Unchecked")
     public Endereco safeDeleteEndereco(Long id) {
         Optional<Endereco> endereco = enderecoRepository.findById(id);
         if (endereco.isPresent()) {
@@ -63,5 +61,9 @@ public class EnderecoService {
         }
         return enderecoRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(why + id));
 
+    }
+    @SuppressWarnings("Unchecked")
+    public List<Endereco> getAll(){
+        return enderecoRepository.findAll();
     }
 }
