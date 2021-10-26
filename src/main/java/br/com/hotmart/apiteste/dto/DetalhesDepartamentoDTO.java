@@ -1,9 +1,6 @@
 package br.com.hotmart.apiteste.dto;
 
-
 import br.com.hotmart.apiteste.model.Departamento;
-
-import java.util.List;
 
 public class DetalhesDepartamentoDTO {
     private Long id;

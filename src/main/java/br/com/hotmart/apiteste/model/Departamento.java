@@ -3,8 +3,6 @@ package br.com.hotmart.apiteste.model;
 import br.com.hotmart.apiteste.form.DepartamentoForm;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 // Reconhecedor de entidade do meu BD
 @Entity @Table(name="departamento", schema = "empresa") //parametros da função, nome da tabela, nome do bd(schema)

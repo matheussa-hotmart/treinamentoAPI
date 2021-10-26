@@ -1,8 +1,5 @@
 package br.com.hotmart.apiteste.form;
 
-import br.com.hotmart.apiteste.model.Departamento;
-import br.com.hotmart.apiteste.repository.DepartamentoRepository;
-
 import javax.validation.constraints.NotNull;
 
 

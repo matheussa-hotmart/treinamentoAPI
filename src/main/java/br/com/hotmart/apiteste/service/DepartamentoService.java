@@ -1,62 +1,58 @@
 package br.com.hotmart.apiteste.service;
 
+import br.com.hotmart.apiteste.exceptions.EntityNotFoundException;
 import br.com.hotmart.apiteste.form.DepartamentoForm;
 import br.com.hotmart.apiteste.form.DepartamentoUpdateForm;
 import br.com.hotmart.apiteste.model.Departamento;
 import br.com.hotmart.apiteste.repository.DepartamentoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Slf4j
 @Service
+@RequiredArgsConstructor
 public class DepartamentoService {
-    @Autowired
-    private DepartamentoRepository departamentoRepository;
+
+    private final DepartamentoRepository departamentoRepository;
+    private String why = "Departamento not found with id: ";
 
     public Departamento createDepartamento(DepartamentoForm form){
         Departamento departamento_save = new Departamento(form);
         departamentoRepository.save(departamento_save);
         return departamento_save;
     }
-
+    @SuppressWarnings("Unchecked")
     public Departamento getOneDepartamento(Long id){
-        //Cria departamento opcional, pois pode ter ou não ter departamento
-        Optional<Departamento> departamento = departamentoRepository.findById(id);
-        //Faz passagem para uma variavel de tipo Departamento(não opcional)
-        Departamento departamento_save = departamento.get();
-        //Verifica se tem algum objeto no departamento
-        if(departamento.isPresent()){
-            //Retorna o save, por causa do tipo (não pode ser opcional)
-            return departamento_save;
-        }
-        // retorna nulo caso não haja departamento no BD com o id passado
-        return null;
+        return departamentoRepository.findById(id).orElseThrow(()-> new EntityNotFoundException(why+id));
     }
-
+    @SuppressWarnings("Unchecked")
     public Departamento updateDepartamento(Long id, DepartamentoUpdateForm form){
         //Pesquisa departamento por id
         Optional<Departamento> departamento = departamentoRepository.findById(id);
-        //Verifica se há um objeto
         if(departamento.isPresent()){
-            //Salvar dados na variavel departamento save
             Departamento departamento_save = departamento.get();
             //Substitui informações que vem do formulário
             departamento_save.setNome(form.getNome());
             departamento_save.setNumero(form.getNumero());
             //Retorno de departamento
-            return departamento_save;
+            departamentoRepository.save(departamento_save);
+            return  departamento_save;
         }
-        //Retorna null pois não acho id
-        return null;
+        return departamentoRepository.findById(id).orElseThrow(()-> new EntityNotFoundException(why+id));
+
     }
+
     public Departamento safeDeleteDepartamento(Long id){
         Optional<Departamento> departamento = departamentoRepository.findById(id);
-        Departamento departamento_save = departamento.get();
-        if(departamento != null){
-            return departamento_save;
+        if(departamento.isPresent()){
+            departamentoRepository.deleteById(id);
+            return departamento.get();
         }
-        return	null;
+        return departamentoRepository.findById(id).orElseThrow(()-> new EntityNotFoundException(why+id));
+
     }
 
 

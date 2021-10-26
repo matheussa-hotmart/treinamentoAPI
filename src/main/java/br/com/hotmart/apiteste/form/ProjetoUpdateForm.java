@@ -1,12 +1,8 @@
 package br.com.hotmart.apiteste.form;
 
 import br.com.hotmart.apiteste.model.Departamento;
-import br.com.hotmart.apiteste.model.Projeto;
-import br.com.hotmart.apiteste.repository.DepartamentoRepository;
-import br.com.hotmart.apiteste.repository.ProjetoRepository;
 
 import javax.validation.constraints.NotNull;
-import java.util.Optional;
 
 public class ProjetoUpdateForm {
     @NotNull
