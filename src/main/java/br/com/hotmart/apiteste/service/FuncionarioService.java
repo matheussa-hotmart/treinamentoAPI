@@ -28,6 +28,8 @@ public class FuncionarioService {
         // set de endereço completo após busca por id no bd
         form.setEndereco(endereco);
         //retorna novo funcionario;
+        Funcionario funcionario = new Funcionario(form);
+        funcionarioRepository.save(funcionario);
         return new Funcionario(form);
     }
     @SuppressWarnings("Unchecked")

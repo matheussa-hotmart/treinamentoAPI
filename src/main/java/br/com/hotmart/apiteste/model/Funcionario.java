@@ -30,6 +30,16 @@ public class Funcionario {
     public Funcionario() {
     }
 
+    public Funcionario(Long id, String nome, String cpf, Date dataNascimneto, char sexo, Endereco endereco, Long supervisor_id) {
+        this.id = id;
+        this.nome = nome;
+        this.cpf = cpf;
+        this.dataNascimneto = dataNascimneto;
+        this.sexo = sexo;
+        this.endereco = endereco;
+        this.supervisor_id = supervisor_id;
+    }
+
     public Funcionario(FuncionarioForm form){
         this.nome = form.getNome();
         this.cpf = form.getCpf();

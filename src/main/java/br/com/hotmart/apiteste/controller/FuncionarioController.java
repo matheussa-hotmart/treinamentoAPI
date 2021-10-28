@@ -17,7 +17,7 @@ public class FuncionarioController {
     @Autowired
     private FuncionarioService funcionarioService;
 
-    @GetMapping("/")
+    @GetMapping()
     public List<FuncionarioDTO> getAllFuncionario(){
         return FuncionarioDTO.converter(funcionarioService.getAll());
     }

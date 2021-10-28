@@ -5,7 +5,8 @@ import br.com.hotmart.apiteste.form.DepartamentoForm;
 import javax.persistence.*;
 
 // Reconhecedor de entidade do meu BD
-@Entity @Table(name="departamento", schema = "empresa") //parametros da função, nome da tabela, nome do bd(schema)
+@Entity
+@Table(name="departamento", schema = "empresa") //parametros da função, nome da tabela, nome do bd(schema)
 public class Departamento {
 
     @Id
