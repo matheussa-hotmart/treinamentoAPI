@@ -47,4 +47,9 @@ public class FuncionarioController {
         return FuncionarioDTO.converter(funcionarioService.getFuncionariosByDepartamentName(nomeDepartamento));
     }
 
+    @GetMapping("/getByName/{nomeFuncionario}")
+    public List<FuncionarioDTO> funcionarioByName(@PathVariable("nomeFuncionario") String nomeFuncionario){
+        return FuncionarioDTO.converter(funcionarioService.findByName(nomeFuncionario)) ;
+    }
+
 }

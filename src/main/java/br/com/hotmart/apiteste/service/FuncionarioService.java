@@ -1,5 +1,6 @@
 package br.com.hotmart.apiteste.service;
 
+import br.com.hotmart.apiteste.dto.FuncionarioDTO;
 import br.com.hotmart.apiteste.exceptions.EntityNotFoundException;
 import br.com.hotmart.apiteste.form.FuncionarioForm;
 import br.com.hotmart.apiteste.model.Endereco;
@@ -19,7 +20,8 @@ public class FuncionarioService {
 
     private final FuncionarioRepository funcionarioRepository;
     private final EnderecoService enderecoService;
-    private String why = "Funcionario not found with id: ";
+    private String attribute = "id";
+    private String why = "Funcionario not found with "+attribute+": ";
 
     @SuppressWarnings("Unchecked")
     public Funcionario createFuncionario(FuncionarioForm form){
@@ -34,6 +36,7 @@ public class FuncionarioService {
     }
     @SuppressWarnings("Unchecked")
     public Funcionario getOneFuncionario(Long id){
+        this.attribute = "id";
         return funcionarioRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(why+id));
     }
 
@@ -52,6 +55,7 @@ public class FuncionarioService {
             funcionarioRepository.save(funcionario.get());
             return  funcionario.get();
         }
+        this.attribute = "id";
         return funcionarioRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(why+id));
     }
     @SuppressWarnings("Unchecked")
@@ -61,6 +65,7 @@ public class FuncionarioService {
             funcionarioRepository.deleteById(id);
             return funcionario.get();
         }
+        this.attribute = "id";
         return funcionarioRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(why+id));
     }
     @SuppressWarnings("Unchecked")
@@ -70,5 +75,10 @@ public class FuncionarioService {
 
     public List<Funcionario> getFuncionariosByDepartamentName(String nomeDepartamento){
         return funcionarioRepository.getFuncionarioByDepartamentName(nomeDepartamento);
+    }
+
+    public List<Funcionario> findByName(String name){
+        this.attribute = "nome";
+        return funcionarioRepository.findFuncionarioByNome(name);
     }
 }
