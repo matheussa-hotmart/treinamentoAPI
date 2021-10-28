@@ -67,4 +67,8 @@ public class FuncionarioService {
     public List<Funcionario> getAll(){
         return funcionarioRepository.findAll();
     }
+
+    public List<Funcionario> getFuncionariosByDepartamentName(String nomeDepartamento){
+        return funcionarioRepository.getFuncionarioByDepartamentName(nomeDepartamento);
+    }
 }

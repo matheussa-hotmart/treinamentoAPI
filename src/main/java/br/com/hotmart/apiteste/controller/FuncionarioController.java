@@ -42,4 +42,9 @@ public class FuncionarioController {
         return ResponseEntity.ok(new FuncionarioDTO(funcionarioService.safeDeleteFuncionario(id)));
     }
 
+    @GetMapping("/departamento/{nomeDepartamento}")
+    public List<FuncionarioDTO> funcionariosByDepartamentName(@PathVariable("nomeDepartamento") String nomeDepartamento){
+        return FuncionarioDTO.converter(funcionarioService.getFuncionariosByDepartamentName(nomeDepartamento));
+    }
+
 }

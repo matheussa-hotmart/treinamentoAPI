@@ -62,8 +62,4 @@ public class FuncionarioProjetoService {
         }
         return funcionarioProjetoRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(why+id));
     }
-
-    public List<Funcionario> getFuncionariosByDepartamentName(String nomeDepartamento){
-        return funcionarioProjetoRepository.getFuncionarioByDepartamentName(nomeDepartamento);
-    }
 }

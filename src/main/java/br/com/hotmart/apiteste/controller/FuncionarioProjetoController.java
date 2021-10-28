@@ -43,9 +43,6 @@ public class FuncionarioProjetoController {
         return new FuncionarioProjetoDTO(funcionarioProjetoService.update(id, form));
     }
 
-    @GetMapping("/funcionariosDoDepartamento/{nomeDepartamento}")
-    public List<FuncionarioDTO> funcionariosByDepartamentName(@PathVariable("nomeDepartamento") String nomeDepartamento){
-        return FuncionarioDTO.converter(funcionarioProjetoService.getFuncionariosByDepartamentName(nomeDepartamento));
-    }
+
 
 }
