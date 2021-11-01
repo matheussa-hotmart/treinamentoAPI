@@ -74,4 +74,9 @@ public class ProjetoService {
         return projetoRepository.findAll();
     }
 
+    /*@SuppressWarnings("Unchecked")
+    public List<Projeto> getAllByFuncionario(Long id){
+        return projetoRepository.findAllProjectsByFuncionarioId(id);
+    }*/
+
 }

@@ -22,6 +22,12 @@ public class Projeto {
     public Projeto() {
     }
 
+    public Projeto(Long id, String nome, Departamento departamento) {
+        this.id = id;
+        this.nome = nome;
+        this.departamento = departamento;
+    }
+
     public Projeto(ProjetoForm form){
         this.nome = form.getNome();
         this.departamento = form.getDepartamento();

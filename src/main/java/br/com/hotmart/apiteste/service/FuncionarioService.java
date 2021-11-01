@@ -81,4 +81,8 @@ public class FuncionarioService {
         this.attribute = "nome";
         return funcionarioRepository.findFuncionarioByNome(name);
     }
+
+    /*public List<Funcionario> findFuncionarioBySupervisor(Long supervisor){
+        return funcionarioRepository.findFuncionarioBySupervisorId(supervisor);
+    }*/
 }

@@ -52,4 +52,9 @@ public class FuncionarioController {
         return FuncionarioDTO.converter(funcionarioService.findByName(nomeFuncionario)) ;
     }
 
+    /*@GetMapping("/getSupervisor/{idSupervisor}")
+    public List<FuncionarioDTO> funcionarioByName(@PathVariable("idSupervisor") Long supervisor){
+        return FuncionarioDTO.converter(funcionarioService.findFuncionarioBySupervisor(supervisor)) ;
+    }*/
+
 }
