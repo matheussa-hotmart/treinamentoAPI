@@ -49,8 +49,10 @@ public class ProjetoController {
         return ResponseEntity.ok(new ProjetoDTO(projetoService.safeDeleteProjeto(id)));
     }
 
-    /*@GetMapping("/getProjetosByFuncionarioId")
+    /*
+    @GetMapping("/getProjetosByFuncionarioId")
     public List<ProjetoDTO> getProjetosByFuncionarioId(@PathVariable Long id){
         return ProjetoDTO.converter(projetoService.getAllByFuncionario(id));
-    }*/
+    }
+    */
 }

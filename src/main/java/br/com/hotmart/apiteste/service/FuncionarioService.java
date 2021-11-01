@@ -82,7 +82,7 @@ public class FuncionarioService {
         return funcionarioRepository.findFuncionarioByNome(name);
     }
 
-    /*public List<Funcionario> findFuncionarioBySupervisor(Long supervisor){
+    public List<Funcionario> findFuncionarioBySupervisor(Long supervisor){
         return funcionarioRepository.findFuncionarioBySupervisorId(supervisor);
-    }*/
+    }
 }
