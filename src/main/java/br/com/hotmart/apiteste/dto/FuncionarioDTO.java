@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 public class FuncionarioDTO {
     private Long id;
+    private float salario;
     private String nome;
     private String cpf;
     private Date dataNascimento;
@@ -18,6 +19,7 @@ public class FuncionarioDTO {
 
     public FuncionarioDTO(Funcionario funcionario) {
         this.id = funcionario.getId();
+        this.salario = funcionario.getSalario();
         this.nome = funcionario.getNome();
         this.cpf = funcionario.getCpf();
         this.dataNascimento = funcionario.getDataNascimneto();
@@ -26,8 +28,13 @@ public class FuncionarioDTO {
         this.supervisor = funcionario.getSupervisor();
     }
 
+
     public Long getId() {
         return id;
+    }
+
+    public float getSalario() {
+        return this.salario;
     }
 
     public String getNome() {

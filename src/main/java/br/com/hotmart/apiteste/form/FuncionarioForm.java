@@ -10,6 +10,8 @@ public class FuncionarioForm {
     @NotNull
     private String nome;
     @NotNull
+    private float salario;
+    @NotNull
     private String cpf;
     @NotNull
     private Date dataNascimento;
@@ -26,6 +28,14 @@ public class FuncionarioForm {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public float getSalario() {
+        return salario;
+    }
+
+    public void setSalario(float salario) {
+        this.salario = salario;
     }
 
     public String getCpf() {

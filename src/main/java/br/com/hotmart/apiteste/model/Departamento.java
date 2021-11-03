@@ -1,6 +1,7 @@
 package br.com.hotmart.apiteste.model;
 
 import br.com.hotmart.apiteste.form.DepartamentoForm;
+import br.com.hotmart.apiteste.form.OrcamentoForm;
 
 import javax.persistence.*;
 
@@ -17,6 +18,9 @@ public class Departamento {
     private String nome;
     @Column(name="numero")
     private int numero;
+    @ManyToOne
+    @JoinColumn(name = "orcamento_id")
+    private Orcamento orcamento;
 
     public Departamento() {
     }
@@ -24,6 +28,7 @@ public class Departamento {
     public Departamento(DepartamentoForm form) {
         this.nome = form.getNome();
         this.numero = form.getNumero();
+        this.orcamento = form.getOrcamento();
     }
 
     public Long getId() {
@@ -46,4 +51,11 @@ public class Departamento {
         this.numero = numero;
     }
 
+    public Orcamento getOrcamento() {
+        return orcamento;
+    }
+
+    public void setOrcamento(Orcamento orcamento) {
+        this.orcamento = orcamento;
+    }
 }

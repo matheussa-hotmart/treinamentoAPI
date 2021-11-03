@@ -3,7 +3,6 @@ package br.com.hotmart.apiteste.controller;
 import br.com.hotmart.apiteste.dto.DepartamentoDTO;
 import br.com.hotmart.apiteste.dto.DetalhesDepartamentoDTO;
 import br.com.hotmart.apiteste.form.DepartamentoForm;
-import br.com.hotmart.apiteste.form.DepartamentoUpdateForm;
 import br.com.hotmart.apiteste.service.DepartamentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -37,7 +36,7 @@ public class DepartamentoController {
 
     @PutMapping("/{id}")
     @Transactional
-    public ResponseEntity<DepartamentoDTO> update(@PathVariable Long id,@RequestBody @Valid DepartamentoUpdateForm form) {
+    public ResponseEntity<DepartamentoDTO> update(@PathVariable Long id,@RequestBody @Valid DepartamentoForm form) {
         return ResponseEntity.ok(new DepartamentoDTO(departamentoService.updateDepartamento(id,form)));
     }
 

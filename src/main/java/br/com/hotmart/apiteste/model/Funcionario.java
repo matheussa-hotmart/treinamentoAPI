@@ -10,9 +10,10 @@ import java.util.Date;
 public class Funcionario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     @Column(name = "id")
     private Long id;
+    @Column (name = "salario")
+    private float salario;
     @Column(name = "nome")
     private String nome;
     @Column(name = "cpf")
@@ -30,8 +31,9 @@ public class Funcionario {
     public Funcionario() {
     }
 
-    public Funcionario(Long id, String nome, String cpf, Date dataNascimneto, char sexo, Endereco endereco, Long supervisor_id) {
+    public Funcionario(Long id, float salario, String nome, String cpf, Date dataNascimneto, char sexo, Endereco endereco, Long supervisor_id) {
         this.id = id;
+        this.salario = salario;
         this.nome = nome;
         this.cpf = cpf;
         this.dataNascimneto = dataNascimneto;
@@ -41,6 +43,7 @@ public class Funcionario {
     }
 
     public Funcionario(FuncionarioForm form){
+        this.salario = form.getSalario();
         this.nome = form.getNome();
         this.cpf = form.getCpf();
         this.dataNascimneto = form.getDataNascimento();
@@ -51,6 +54,14 @@ public class Funcionario {
 
     public Long getId() {
         return id;
+    }
+
+    public float getSalario() {
+        return salario;
+    }
+
+    public void setSalario(float salario) {
+        this.salario = salario;
     }
 
     public void setId(Long id) {

@@ -1,6 +1,5 @@
 package br.com.hotmart.apiteste.service;
 
-import br.com.hotmart.apiteste.dto.FuncionarioDTO;
 import br.com.hotmart.apiteste.exceptions.EntityNotFoundException;
 import br.com.hotmart.apiteste.form.FuncionarioForm;
 import br.com.hotmart.apiteste.model.Endereco;
@@ -32,7 +31,7 @@ public class FuncionarioService {
         //retorna novo funcionario;
         Funcionario funcionario = new Funcionario(form);
         funcionarioRepository.save(funcionario);
-        return new Funcionario(form);
+        return funcionario;
     }
     @SuppressWarnings("Unchecked")
     public Funcionario getOneFuncionario(Long id){
@@ -47,6 +46,7 @@ public class FuncionarioService {
         Optional<Funcionario> funcionario = funcionarioRepository.findById(id);
         if(funcionario.isPresent()){
             funcionario.get().setCpf(form.getCpf());
+            funcionario.get().setSalario(form.getSalario());
             funcionario.get().setNome(form.getNome());
             funcionario.get().setDataNascimneto(form.getDataNascimento());
             funcionario.get().setSexo(form.getSexo());
