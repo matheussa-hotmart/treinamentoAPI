@@ -21,8 +21,10 @@ public class OrcamentoService {
 
     @SuppressWarnings("Unchecked")
     public Orcamento createOrcamento(OrcamentoForm form){
-        //retorna novo funcionario;
         Orcamento orcamento = new Orcamento(form);
+        System.out.println(orcamento.getValor());
+        System.out.println(orcamento.getDataInicio());
+        System.out.println(orcamento.getDataFim());
         orcamentoRepository.save(orcamento);
         return orcamento;
     }

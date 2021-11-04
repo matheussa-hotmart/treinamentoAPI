@@ -2,13 +2,14 @@ package br.com.hotmart.apiteste.dto;
 
 import br.com.hotmart.apiteste.model.Orcamento;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class OrcamentoDTO {
     private Long id;
-    private float valor;
+    private BigDecimal valor;
     private Date dataInicio;
     private Date dataFim;
 
@@ -23,7 +24,7 @@ public class OrcamentoDTO {
         return id;
     }
 
-    public float getValor() {
+    public BigDecimal getValor() {
         return valor;
     }
 

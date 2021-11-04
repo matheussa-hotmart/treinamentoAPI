@@ -3,6 +3,7 @@ package br.com.hotmart.apiteste.model;
 import br.com.hotmart.apiteste.form.OrcamentoForm;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
@@ -14,7 +15,7 @@ public class Orcamento {
     @Column(name = "id")
     private Long id;
     @Column(name = "valor")
-    private float valor;
+    private BigDecimal valor;
     @Column(name = "dataInicio")
     private Date dataInicio;
     @Column(name = "dataFim")
@@ -23,12 +24,6 @@ public class Orcamento {
     public Orcamento() {
     }
 
-    public Orcamento(Long id, float valor, Date dataInicio, Date dataFim) {
-        this.id = id;
-        this.valor = valor;
-        this.dataInicio = dataInicio;
-        this.dataFim = dataFim;
-    }
 
     public Orcamento(OrcamentoForm form) {
         this.valor = form.getValor();
@@ -44,11 +39,11 @@ public class Orcamento {
         this.id = id;
     }
 
-    public float getValor() {
+    public BigDecimal getValor() {
         return valor;
     }
 
-    public void setValor(float valor) {
+    public void setValor(BigDecimal valor) {
         this.valor = valor;
     }
 

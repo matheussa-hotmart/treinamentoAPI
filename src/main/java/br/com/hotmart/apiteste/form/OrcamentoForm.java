@@ -1,22 +1,21 @@
 package br.com.hotmart.apiteste.form;
 
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class OrcamentoForm {
 
     @NotNull
-    private float valor;
-    @NotNull
+    private BigDecimal valor;
     private Date dataInicio;
-    @NotNull
     private Date dataFim;
 
-    public float getValor() {
+    public BigDecimal getValor() {
         return valor;
     }
 
-    public void setValor(float valor) {
+    public void setValor(BigDecimal valor) {
         this.valor = valor;
     }
 
