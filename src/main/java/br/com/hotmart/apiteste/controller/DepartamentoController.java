@@ -1,9 +1,9 @@
 package br.com.hotmart.apiteste.controller;
 
 import br.com.hotmart.apiteste.dto.DepartamentoDTO;
-import br.com.hotmart.apiteste.dto.DetalhesDepartamentoDTO;
 import br.com.hotmart.apiteste.form.DepartamentoForm;
 import br.com.hotmart.apiteste.service.DepartamentoService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,8 +30,8 @@ public class DepartamentoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<DetalhesDepartamentoDTO> detail(@PathVariable("id") Long id){
-        return ResponseEntity.ok(new DetalhesDepartamentoDTO(departamentoService.getOneDepartamento(id)));
+    public ResponseEntity<DepartamentoDTO> detail(@PathVariable("id") Long id){
+        return ResponseEntity.ok(new DepartamentoDTO(departamentoService.getOneDepartamento(id)));
     }
 
     @PutMapping("/{id}")
@@ -42,7 +42,12 @@ public class DepartamentoController {
 
     @DeleteMapping("/{id}")
     @Transactional
-    public ResponseEntity<DepartamentoDTO> safe_delete(@PathVariable Long id) {
+    public ResponseEntity<DepartamentoDTO> safeDelete(@PathVariable Long id) {
         return ResponseEntity.ok(new DepartamentoDTO(departamentoService.safeDeleteDepartamento(id)));
+    }
+
+    @GetMapping("/statusOrcamento/{id}")
+    public ResponseEntity<String> statusOrcamento(@PathVariable Long id){
+        return ResponseEntity.ok(departamentoService.statusOrcamento(id));
     }
 }

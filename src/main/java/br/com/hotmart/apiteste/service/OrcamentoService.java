@@ -22,10 +22,15 @@ public class OrcamentoService {
     @SuppressWarnings("Unchecked")
     public Orcamento createOrcamento(OrcamentoForm form){
         Orcamento orcamento = new Orcamento(form);
+        /*
+        Error ao adicionar data, porém data vem correta, pq do erro?? default value
+
         System.out.println(orcamento.getValor());
         System.out.println(orcamento.getDataInicio());
         System.out.println(orcamento.getDataFim());
+        */
         orcamentoRepository.save(orcamento);
+
         return orcamento;
     }
 
@@ -40,7 +45,7 @@ public class OrcamentoService {
     }
 
     @SuppressWarnings("Unchecked")
-    public Orcamento safe_delete(Long id){
+    public Orcamento safeDelete(Long id){
         Optional<Orcamento> orcamento = orcamentoRepository.findById(id);
         if(orcamento.isPresent()){
             orcamentoRepository.deleteById(id);

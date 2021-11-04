@@ -33,7 +33,7 @@ public class OrcamentoController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<OrcamentoDTO> delete(@PathVariable("id") Long id){
-        return ResponseEntity.ok(new OrcamentoDTO(orcamentoService.safe_delete(id)));
+        return ResponseEntity.ok(new OrcamentoDTO(orcamentoService.safeDelete(id)));
     }
 
     @PutMapping("/{id}")

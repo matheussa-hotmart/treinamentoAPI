@@ -17,4 +17,6 @@ public interface FuncionarioRepository extends JpaRepository<Funcionario, Long> 
 
     @Query("SELECT new br.com.hotmart.apiteste.model.Funcionario(f.id,f.salario,f.nome,f.cpf,f.dataNascimneto,f.sexo, f.endereco,f.supervisor_id) FROM Funcionario f WHERE f.supervisor_id= :idSupervisor ")
     List<Funcionario> findFuncionarioBySupervisorId(Long idSupervisor);
+
+
 }
