@@ -82,6 +82,6 @@ public class DepartamentoService {
                 return "VERMELHO";
             }
         }
-        return "Error";
+        throw new EntityNotFoundException(why+id);
     }
 }
