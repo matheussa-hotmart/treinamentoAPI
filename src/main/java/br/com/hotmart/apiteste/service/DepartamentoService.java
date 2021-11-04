@@ -10,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -74,7 +73,6 @@ public class DepartamentoService {
             List<Funcionario> funcionarios = departamentoRepository.findSalariosPorDepartamento(id);
             for(int cont = 0; cont < funcionarios.size(); cont++){
                 total += (funcionarios.get(cont).getSalario());
-                System.out.println(total);
             }
             if(total <=  departamento.get().getOrcamento().getValor().doubleValue()){
                 return "VERDE";
